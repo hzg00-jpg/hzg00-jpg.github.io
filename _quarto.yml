@@ -3,18 +3,19 @@ project:
   output-dir: docs
 
 website:
-  title: "hzg00-jpg"
+  title: "Data science"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
       - text: "Data Visualization"
         menu: 
           - text: "Food and beverages"
             href: food_beverages_tt.qmd
           - text: "Penguins"
             href: penguins.qmd
+          - text: "Shakespeare"
+            href: shakespeare.qmd
 
 format:
   html:

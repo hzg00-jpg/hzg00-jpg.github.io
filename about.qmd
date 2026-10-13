@@ -1,9 +1,0 @@
----
-title: "About"
----
-
-Hello. I like ducks.
-
-![](images/duck.png)
-
-Github repo: https://github.com/hzg00-jpg/hzg00-jpg.github.io

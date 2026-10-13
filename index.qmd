@@ -1,7 +1,9 @@
 ---
-title: "hzg00-jpg"
+title: "Welcome to my site"
 ---
 
-This is a Quarto website.
+Hello, I'm hzg00-jpg. I like ducks.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+![](images/duck.png)
+
+Github repo: <https://github.com/hzg00-jpg/hzg00-jpg.github.io>

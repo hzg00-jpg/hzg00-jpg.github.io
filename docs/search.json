@@ -1,30 +1,58 @@
 [
   {
-    "objectID": "penguins.html",
-    "href": "penguins.html",
-    "title": "Penguins",
+    "objectID": "shakespeare.html",
+    "href": "shakespeare.html",
+    "title": "Shakespeare Dialogue Analysis",
     "section": "",
-    "text": "Data collected from: https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-07-14"
+    "text": "Data collected from: https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-09-17/\nOriginal data from: https://shakespeare.mit.edu/\nThis dataset shows dialogue from 3 of Shakespeare’s plays: Hamlet, Macbeth, and Romeo and Juliet. This project looks at how dialogue differs between plays, which characters speak the most, and how frequently certain themes appear.\nWe want to answer the following questions:"
+  },
+  {
+    "objectID": "shakespeare.html#loading-data",
+    "href": "shakespeare.html#loading-data",
+    "title": "Shakespeare Dialogue Analysis",
+    "section": "Loading data",
+    "text": "Loading data\n\n\nCode\nlibrary(tidyverse)\nlibrary(stringr)\nlibrary(forcats)\n\nhamlet &lt;- read_csv(\"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-09-17/hamlet.csv\")\n\nmacbeth &lt;- read_csv(\"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-09-17/macbeth.csv\")\n\nromeo_juliet &lt;- read_csv(\"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2024/2024-09-17/romeo_juliet.csv\")\n\nplays &lt;- bind_rows(\n  hamlet |&gt; mutate(play = \"Hamlet\"),\n  macbeth |&gt; mutate(play = \"Macbeth\"),\n  romeo_juliet |&gt; mutate(play = \"Romeo and Juliet\")\n)\n\nplays &lt;- plays |&gt;\n  filter(!is.na(dialogue), !is.na(character)) |&gt;\n  filter(!str_detect(character, regex(\"stage direction\", ignore_case = TRUE))) |&gt;\n  mutate(\n    dialogue = str_squish(dialogue),\n    character = str_to_title(character),\n    play = factor(play, levels = c(\"Hamlet\", \"Macbeth\", \"Romeo and Juliet\")),\n    word_count = str_count(dialogue, \"\\\\b[A-Za-z]+\\\\b\")\n  )"
+  },
+  {
+    "objectID": "shakespeare.html#which-characters-speak-the-most-in-each-play",
+    "href": "shakespeare.html#which-characters-speak-the-most-in-each-play",
+    "title": "Shakespeare Dialogue Analysis",
+    "section": "Which characters speak the most in each play?",
+    "text": "Which characters speak the most in each play?\nThis plot shows the total number of words spoken by each character.\n\n\nCode\nmost_words &lt;- plays |&gt;\n  group_by(play, character) |&gt;\n  summarise(\n    total_words = sum(word_count),\n    .groups = \"drop\"\n  ) |&gt;\n  group_by(play) |&gt;\n  slice_max(total_words, n = 5, with_ties = FALSE) |&gt;\n  ungroup() |&gt;\n  mutate(\n    character = fct_reorder(character, total_words)\n  )\n\nggplot(most_words, aes(x = total_words/1000, y = character, fill = play)) +\n  geom_col(show.legend = FALSE) +\n  facet_wrap(~play, scales = \"free_y\") +\n  labs(\n    title = \"Words spoken by main characters\",\n    x = \"Total words spoken (thousands)\",\n    y = \"Character\"\n  )\n\n\n\n\n\n\n\n\n\nIn Hamlet, Hamlet speaks the most, followed by King Claudius. In Macbeth, Macbeth and Lady Macbeth speaks the most, followed by Malcom. In Romeo and Juliet, Romeo and Juliet speak the most, followed by Friar Laurence."
+  },
+  {
+    "objectID": "shakespeare.html#how-frequently-do-words-related-to-love-and-death-appear",
+    "href": "shakespeare.html#how-frequently-do-words-related-to-love-and-death-appear",
+    "title": "Shakespeare Dialogue Analysis",
+    "section": "How frequently do words related to love and death appear?",
+    "text": "How frequently do words related to love and death appear?\nThe plot shows the percentage of the text in the play that has words involving love or death. Matches for love include “love”, “loved”, “lover”, and “lovers”. Matches for death include “death”, “dead”, “die”, “dies”, “died”, and “dying”.\n\n\nCode\nlove_death &lt;- plays |&gt;\n  mutate(\n    love = str_detect(\n      dialogue,\n      regex(\"\\\\blov(?=e\\\\b|ed\\\\b|er\\\\b|ers\\\\b)[a-z]+\\\\b\", ignore_case = TRUE)\n    ),\n    death = str_detect(\n      dialogue,\n      regex(\"\\\\b(?:death|dead|die|dies|died|dying)\\\\b\", ignore_case = TRUE)\n    )\n  )\n\nlove_death_counts &lt;- love_death |&gt;\n  group_by(play) |&gt;\n  summarise(\n    love_percent = mean(love) * 100,\n    death_percent = mean(death) * 100,\n    .groups = \"drop\"\n  ) |&gt;\n  pivot_longer(\n    cols = c(love_percent, death_percent),\n    names_to = \"theme\",\n    values_to = \"percentage\"\n  ) |&gt;\n  mutate(\n    theme = recode(\n      theme,\n      love_percent = \"Love\",\n      death_percent = \"Death\"\n    )\n  )\n\nggplot(love_death_counts, aes(x = play, y = percentage, fill = theme)) +\n  geom_col(position = \"dodge\") +\n  labs(\n    title = \"Percentage of dialogue entries mentioning love or death\",\n    x = \"Play\",\n    y = \"Dialogue entries containing love or death (%)\",\n    fill = \"Theme\"\n  ) \n\n\n\n\n\n\n\n\n\nFrom the graph, we can see that Romeo and Juliet have much more references to love and death compared to Shakespeare’s other works, which makes sense, as the main cast loved each other and died."
+  },
+  {
+    "objectID": "shakespeare.html#which-words-are-most-frequently-used-in-each-play",
+    "href": "shakespeare.html#which-words-are-most-frequently-used-in-each-play",
+    "title": "Shakespeare Dialogue Analysis",
+    "section": "Which words are most frequently used in each play?",
+    "text": "Which words are most frequently used in each play?\nThe plot shows the top 10 most used words and how much they are used. To prevent the graph from displaying words like “the”, “and”, “to”, and “i”, the plot will only display words that are at least 7 characters long.\n\n\nCode\ncommon_words &lt;- plays |&gt;\n  mutate(\n    word = str_to_lower(dialogue),\n    word = str_extract_all(word, \"\\\\b[a-z]+\\\\b\")\n  ) |&gt;\n  unnest(word) |&gt;\n  filter(str_length(word) &gt;= 7) |&gt;\n  count(play, word, sort = TRUE) |&gt;\n  group_by(play) |&gt;\n  slice_max(n, n = 10, with_ties = FALSE) |&gt;\n  ungroup()\n\nggplot(common_words, aes(x = n, y = reorder(word, n), fill = play)) +\n  geom_col(show.legend = FALSE) +\n  facet_wrap(~play, scales = \"free_y\") +\n  labs(\n    title = \"Most frequently used words in each play\",\n    x = \"Word frequency\",\n    y = \"Word\"\n  )\n\n\n\n\n\n\n\n\n\nThe word ‘nothing’ is used a lot in both Hamlet and Macbeth. Aside from names, the word ‘madness’ is mentioned a lot in Hamlet, ‘against’ and ‘strange’ in Macbeth, and ‘farewell’ in Romeo and Juliet."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to my site",
+    "section": "",
+    "text": "Hello, I’m hzg00-jpg. I like ducks.\n\nGithub repo: https://github.com/hzg00-jpg/hzg00-jpg.github.io"
   },
   {
     "objectID": "food_beverages_tt.html",
     "href": "food_beverages_tt.html",
     "title": "Food Beverages",
     "section": "",
-    "text": "Data collected from: https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-05-05"
+    "text": "Data collected from: https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-05-05\nOriginal data from: https://www.istat.it/\n\n\nCode\nsuppressPackageStartupMessages(library(tidyverse))\n\n\nThis dataset gives data on industrial production of food and beverages, transport equipment, and textiles over a period of 100 years.\n\n\nCode\nfood_beverages &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-05-05/food_beverages.csv', show_col_types = FALSE)\n\nggplot(food_beverages, aes(x = Year, y = Sugar)) +\n    geom_point() + \n    labs(\n        x = \"Year\",\n        y = \"Sugar produced (tons)\",\n        title = \"Sugar production levels over the years\"\n    )\n\n\n\n\n\n\n\n\n\nWe can see that over the years, sugar production levels have continued to increase, with each decade almost always surpassing the previous decade in production."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "penguins.html",
+    "href": "penguins.html",
+    "title": "Penguins",
     "section": "",
-    "text": "Hello. I like ducks.\n\nGithub repo: https://github.com/hzg00-jpg/hzg00-jpg.github.io"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "hzg00-jpg",
-    "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Data collected from: https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-07-14\nOriginal data from: https://opentraits.org/datasets/avonet.html\n\n\nCode\nsuppressPackageStartupMessages(library(tidyverse))\n\n\nThis dataset gives morphometric data for 18 species of penguins within 6 genera. In total, 93 penguins were surveyed.\n\n\nCode\nmany_penguins &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-07-14/many_penguins.csv', show_col_types = FALSE)\n\n\nggplot(many_penguins, aes(x = beak.width, y = beak.length_culmen)) +\n    geom_point() + \n    labs(\n        x = \"Beak width (mm)\",\n        y = \"Culmen length (mm)\",\n        title = \"Penguin beak width to culmen length relation\"\n    ) +\n        facet_wrap(~species)\n\n\n\n\n\n\n\n\n\nWe can see that, for 6 of the species, there is little variation of culmen length and beak width. However, some species, such as eudyptes robustus. have quite a large variation in their culmen length and beak width. Overall, there is little relation between the two measurements."
   }
 ]

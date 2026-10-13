@@ -4,19 +4,24 @@ description: |
   Analysis of food beverages data from TidyTuesday
 author: hzg00-jpg
 date: 09/28/2026
-format: html
+format:
+  html:
+    code-fold: true
+    toc: false
+execute:
+  warning: false
+  message: false
 ---
 
-Data collected from: https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-05-05
+Data collected from: <https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-05-05> \
+Original data from: <https://www.istat.it/>
 
 ```{r}
-#| echo: false
 suppressPackageStartupMessages(library(tidyverse))
 ```
 
+This dataset gives data on industrial production of food and beverages, transport equipment, and textiles over a period of 100 years.
 ```{r}
-#| echo: false
-#| warning: false
 food_beverages <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-05-05/food_beverages.csv', show_col_types = FALSE)
 
 ggplot(food_beverages, aes(x = Year, y = Sugar)) +
@@ -27,3 +32,5 @@ ggplot(food_beverages, aes(x = Year, y = Sugar)) +
         title = "Sugar production levels over the years"
     )
 ```
+
+We can see that over the years, sugar production levels have continued to increase, with each decade almost always surpassing the previous decade in production.

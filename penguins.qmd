@@ -4,19 +4,25 @@ description: |
   Analysis of penguin data from TidyTuesday
 author: hzg00-jpg
 date: 09/28/2026
-format: html
+format:
+  html:
+    code-fold: true
+    toc: false
+execute:
+  warning: false
+  message: false
 ---
 
-Data collected from: https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-07-14
+Data collected from: <https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-07-14>\
+Original data from: <https://opentraits.org/datasets/avonet.html>
 
 ```{r}
-#| echo: false
 suppressPackageStartupMessages(library(tidyverse))
 ```
 
+This dataset gives morphometric data for 18 species of penguins within 6 genera. In total, 93 penguins were surveyed. 
+
 ```{r}
-#| echo: false
-#| warning: false
 many_penguins <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-07-14/many_penguins.csv', show_col_types = FALSE)
 
 
@@ -29,3 +35,5 @@ ggplot(many_penguins, aes(x = beak.width, y = beak.length_culmen)) +
     ) +
         facet_wrap(~species)
 ```
+
+We can see that, for 6 of the species, there is little variation of culmen length and beak width. However, some species, such as eudyptes robustus. have quite a large variation in their culmen length and beak width. Overall, there is little relation between the two measurements.
