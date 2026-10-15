@@ -4,7 +4,7 @@
     "href": "shakespeare.html",
     "title": "Shakespeare Dialogue Analysis",
     "section": "",
-    "text": "Data collected from: https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-09-17/\nOriginal data from: https://shakespeare.mit.edu/\nThis dataset shows dialogue from 3 of Shakespeare’s plays: Hamlet, Macbeth, and Romeo and Juliet. This project looks at how dialogue differs between plays, which characters speak the most, and how frequently certain themes appear.\nWe want to answer the following questions:"
+    "text": "Data collected from: https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-09-17/\nOriginal data from: https://shakespeare.mit.edu/\nThis dataset shows dialogue from 3 of Shakespeare’s plays: Hamlet, Macbeth, and Romeo and Juliet. This project looks at how word usage differs between plays, which characters speak the most, and how frequently certain themes appear.\nWe want to answer the following questions:"
   },
   {
     "objectID": "shakespeare.html#loading-data",

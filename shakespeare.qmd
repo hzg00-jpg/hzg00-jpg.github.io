@@ -16,7 +16,7 @@ execute:
 Data collected from: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-09-17/> \
 Original data from: <https://shakespeare.mit.edu/>
 
-This dataset shows dialogue from 3 of Shakespeare's plays: *Hamlet*, *Macbeth*, and *Romeo and Juliet*. This project looks at how dialogue differs between plays, which characters speak the most, and how frequently certain themes appear.
+This dataset shows dialogue from 3 of Shakespeare's plays: *Hamlet*, *Macbeth*, and *Romeo and Juliet*. This project looks at how word usage differs between plays, which characters speak the most, and how frequently certain themes appear.
 
 We want to answer the following questions:
 
