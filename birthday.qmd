@@ -1,9 +1,9 @@
 ---
-title: "birthday problem"
+title: "Birthday problem"
 description: |
-  Enter description
+  Analysis of the birthday problem using probability simulations
 author: hzg00-jpg
-date: 11/1/2026
+date: 11/2/2026
 format:
   html:
     code-fold: true
@@ -19,10 +19,10 @@ Although there are 365 days in a year, the unintuitive answer is that if there a
 
 This simulation creates a function called `simulate_birthday()` that randomly assigns a birthday to each person in a room, assuming 365 equally likely birthdays. It then checks for matching birthdays using `duplicated()` and `any()`, returning `TRUE` if there is a match and `FALSE` otherwise. This process is repeated 5,000 times to estimate the probability of a shared birthday by calculating the proportion of successful matches. We then map this process using using `map_dbl()`, applying this process to room sizes ranging from 2 to 60 people, allowing us to see how the probability changes as the number of people increases.
 
-## Code
+## Results
 ```{r}
 library(tidyverse)
-set.seed(47)
+set.seed(4747)
 
 num_of_people <- 2:60
 num_of_runs <- 5000

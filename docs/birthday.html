@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="hzg00-jpg">
-<meta name="dcterms.date" content="2026-11-01">
-<meta name="description" content="Enter description">
+<meta name="dcterms.date" content="2026-11-02">
+<meta name="description" content="Analysis of the birthday problem using probability simulations">
 
-<title>birthday problem – Data science</title>
+<title>Birthday problem – Data science</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -177,12 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">birthday problem</h1>
+<h1 class="title">Birthday problem</h1>
 </div>
 
 <div>
   <div class="description">
-    <p>Enter description</p>
+    <p>Analysis of the birthday problem using probability simulations</p>
   </div>
 </div>
 
@@ -199,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 1, 2026</p>
+      <p class="date">November 2, 2026</p>
     </div>
   </div>
   
@@ -214,13 +214,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Birthday problem: In a room of n people, what is the probability that at least 2 people will share a birthday?</p>
 <p>Although there are 365 days in a year, the unintuitive answer is that if there are just 23 people in the same room, there is over a 50% chance that two people share the same birthday. In this project, we will try to explain the unintuitive answer by running simulations that shows the probability that at least 2 people have the same birthday in a room of n people.</p>
 <p>This simulation creates a function called <code>simulate_birthday()</code> that randomly assigns a birthday to each person in a room, assuming 365 equally likely birthdays. It then checks for matching birthdays using <code>duplicated()</code> and <code>any()</code>, returning <code>TRUE</code> if there is a match and <code>FALSE</code> otherwise. This process is repeated 5,000 times to estimate the probability of a shared birthday by calculating the proportion of successful matches. We then map this process using using <code>map_dbl()</code>, applying this process to room sizes ranging from 2 to 60 people, allowing us to see how the probability changes as the number of people increases.</p>
-<section id="code" class="level2">
-<h2 class="anchored" data-anchor-id="code">Code</h2>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4747</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>num_of_people <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">60</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>num_of_runs <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
@@ -249,18 +249,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 12 × 2
    people probability
     &lt;int&gt;       &lt;dbl&gt;
- 1      5      0.0238
- 2     10      0.115 
- 3     15      0.254 
- 4     20      0.418 
- 5     25      0.566 
- 6     30      0.706 
- 7     35      0.815 
- 8     40      0.888 
- 9     45      0.943 
-10     50      0.974 
-11     55      0.986 
-12     60      0.993 </code></pre>
+ 1      5      0.0262
+ 2     10      0.109 
+ 3     15      0.264 
+ 4     20      0.413 
+ 5     25      0.571 
+ 6     30      0.696 
+ 7     35      0.814 
+ 8     40      0.891 
+ 9     45      0.939 
+10     50      0.965 
+11     55      0.984 
+12     60      0.994 </code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
