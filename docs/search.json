@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "penguins.html",
+    "href": "penguins.html",
+    "title": "Penguins",
+    "section": "",
+    "text": "Data collected from: https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-07-14\nOriginal data from: https://opentraits.org/datasets/avonet.html\n\n\nCode\nsuppressPackageStartupMessages(library(tidyverse))\n\n\nThis dataset gives morphometric data for 18 species of penguins within 6 genera. In total, 93 penguins were surveyed.\n\n\nCode\nmany_penguins &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-07-14/many_penguins.csv', show_col_types = FALSE)\n\n\nggplot(many_penguins, aes(x = beak.width, y = beak.length_culmen)) +\n    geom_point() + \n    labs(\n        x = \"Beak width (mm)\",\n        y = \"Culmen length (mm)\",\n        title = \"Penguin beak width to culmen length relation\"\n    ) +\n        facet_wrap(~species)\n\n\n\n\n\n\n\n\n\nWe can see that, for 6 of the species, there is little variation of culmen length and beak width. However, some species, such as eudyptes robustus. have quite a large variation in their culmen length and beak width. Overall, there is little relation between the two measurements."
+  },
+  {
+    "objectID": "food_beverages_tt.html",
+    "href": "food_beverages_tt.html",
+    "title": "Food Beverages",
+    "section": "",
+    "text": "Data collected from: https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-05-05\nOriginal data from: https://www.istat.it/\n\n\nCode\nsuppressPackageStartupMessages(library(tidyverse))\n\n\nThis dataset gives data on industrial production of food and beverages, transport equipment, and textiles over a period of 100 years.\n\n\nCode\nfood_beverages &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-05-05/food_beverages.csv', show_col_types = FALSE)\n\nggplot(food_beverages, aes(x = Year, y = Sugar)) +\n    geom_point() + \n    labs(\n        x = \"Year\",\n        y = \"Sugar produced (tons)\",\n        title = \"Sugar production levels over the years\"\n    )\n\n\n\n\n\n\n\n\n\nWe can see that over the years, sugar production levels have continued to increase, with each decade almost always surpassing the previous decade in production."
+  },
+  {
     "objectID": "shakespeare.html",
     "href": "shakespeare.html",
     "title": "Shakespeare Dialogue Analysis",
@@ -42,17 +56,17 @@
     "text": "Hello, I’m hzg00-jpg. I like ducks.\n\nGithub repo: https://github.com/hzg00-jpg/hzg00-jpg.github.io"
   },
   {
-    "objectID": "food_beverages_tt.html",
-    "href": "food_beverages_tt.html",
-    "title": "Food Beverages",
+    "objectID": "birthday.html",
+    "href": "birthday.html",
+    "title": "birthday problem",
     "section": "",
-    "text": "Data collected from: https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-05-05\nOriginal data from: https://www.istat.it/\n\n\nCode\nsuppressPackageStartupMessages(library(tidyverse))\n\n\nThis dataset gives data on industrial production of food and beverages, transport equipment, and textiles over a period of 100 years.\n\n\nCode\nfood_beverages &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-05-05/food_beverages.csv', show_col_types = FALSE)\n\nggplot(food_beverages, aes(x = Year, y = Sugar)) +\n    geom_point() + \n    labs(\n        x = \"Year\",\n        y = \"Sugar produced (tons)\",\n        title = \"Sugar production levels over the years\"\n    )\n\n\n\n\n\n\n\n\n\nWe can see that over the years, sugar production levels have continued to increase, with each decade almost always surpassing the previous decade in production."
+    "text": "Birthday problem: In a room of n people, what is the probability that at least 2 people will share a birthday?\nAlthough there are 365 days in a year, the unintuitive answer is that if there are just 23 people in the same room, there is over a 50% chance that two people share the same birthday. In this project, we will try to explain the unintuitive answer by running simulations that shows the probability that at least 2 people have the same birthday in a room of n people.\nThis simulation creates a function called simulate_birthday() that randomly assigns a birthday to each person in a room, assuming 365 equally likely birthdays. It then checks for matching birthdays using duplicated() and any(), returning TRUE if there is a match and FALSE otherwise. This process is repeated 5,000 times to estimate the probability of a shared birthday by calculating the proportion of successful matches. We then map this process using using map_dbl(), applying this process to room sizes ranging from 2 to 60 people, allowing us to see how the probability changes as the number of people increases."
   },
   {
-    "objectID": "penguins.html",
-    "href": "penguins.html",
-    "title": "Penguins",
-    "section": "",
-    "text": "Data collected from: https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-07-14\nOriginal data from: https://opentraits.org/datasets/avonet.html\n\n\nCode\nsuppressPackageStartupMessages(library(tidyverse))\n\n\nThis dataset gives morphometric data for 18 species of penguins within 6 genera. In total, 93 penguins were surveyed.\n\n\nCode\nmany_penguins &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-07-14/many_penguins.csv', show_col_types = FALSE)\n\n\nggplot(many_penguins, aes(x = beak.width, y = beak.length_culmen)) +\n    geom_point() + \n    labs(\n        x = \"Beak width (mm)\",\n        y = \"Culmen length (mm)\",\n        title = \"Penguin beak width to culmen length relation\"\n    ) +\n        facet_wrap(~species)\n\n\n\n\n\n\n\n\n\nWe can see that, for 6 of the species, there is little variation of culmen length and beak width. However, some species, such as eudyptes robustus. have quite a large variation in their culmen length and beak width. Overall, there is little relation between the two measurements."
+    "objectID": "birthday.html#code",
+    "href": "birthday.html#code",
+    "title": "birthday problem",
+    "section": "Code",
+    "text": "Code\n\n\nCode\nlibrary(tidyverse)\nset.seed(47)\n\nnum_of_people &lt;- 2:60\nnum_of_runs &lt;- 5000\n\nsimulate_birthday &lt;- function(people) {\n  birthdays &lt;- sample.int(365, people, replace = TRUE)\n\n  any(duplicated(birthdays))\n}\n\nresults &lt;- tibble(\n  people = num_of_people,\n  probability = map_dbl(\n    num_of_people,\n    \\(n) mean(replicate(\n      num_of_runs,\n      simulate_birthday(n)\n    ))\n  )\n)\n\nresults |&gt;\n  filter(people %% 5 == 0)\n\n\n# A tibble: 12 × 2\n   people probability\n    &lt;int&gt;       &lt;dbl&gt;\n 1      5      0.0238\n 2     10      0.115 \n 3     15      0.254 \n 4     20      0.418 \n 5     25      0.566 \n 6     30      0.706 \n 7     35      0.815 \n 8     40      0.888 \n 9     45      0.943 \n10     50      0.974 \n11     55      0.986 \n12     60      0.993 \n\n\nCode\nggplot(results, aes(x = people, y = probability)) +\n  geom_line(color = \"blue\", linewidth = 1) +\n  geom_point(color = \"blue\", size = 1) +\n  geom_hline(\n    yintercept = 0.5,\n    linetype = \"dashed\",\n  ) +\n  scale_y_continuous(\n    labels = scales::label_percent()\n  ) +\n  labs(\n    title = \"Birthday problem\",\n    subtitle = \"Simulated probability from 5,000 runs\",\n    x = \"Number of people\",\n    y = \"Probability of at least 1 shared birthday\"\n  ) + theme_minimal()\n\n\n\n\n\n\n\n\n\nThe results show that the probability of a shared birthday increases rapidly as the number of people grows. At n=10 people, there is already a ~11.5% chance that 2 people share the same birthday, a very unintuitive number as there are 365 days in a year. At n=25 people, it’s a a ~56.6% chance that 2 people share the same birthday, and at n=50 people, it’s almost guaranteed that we have 2 people with the same birthday.\nFrom the plot, we can see that the probability grows the most rapidly from 0 to around 35 people, then slows down as it approaches the asymptote of 100% probability. The unintuitive answer stems from the fact that we are not checking whether someone shares a birthday with one specific person, but whether any two people in the room share a birthday. As there are more and more people, the number of possible pairs increases rapidly, making a shared birthday much more likely than one might initially expect."
   }
 ]

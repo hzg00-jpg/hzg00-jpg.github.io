@@ -16,6 +16,8 @@ website:
             href: penguins.qmd
           - text: "Shakespeare"
             href: shakespeare.qmd
+          - text: "Birthday problem"
+            href: birthday.qmd
 
 format:
   html:
