@@ -98,7 +98,7 @@ ggplot(
   labs(
     title = "Probability of consecutive heads/tails",
     subtitle = paste0("Streak length of at least ", k, ", ran ", num_trials, " times"),
-    x = "Sequence length",
+    x = "Number of flips",
     y = "Probability of a streak occuring",
     color = "Probability of heads"
   ) +
@@ -106,6 +106,6 @@ ggplot(
 ```
 (Note: length 100,000 is excluded from the plot)
 
-From the plot, we see that, when the coin is fair, the probability of getting 20 heads/tails in a row is below 5% for all rolls below 15,000. On the other hand, when the coin is biased, the probability of getting a 20 streak rises dramatically, hitting almost 20% for 15,000 rolls and 80% for 100,000 rolls.
+From the plot, we see that, when the coin is fair, the probability of getting 20 heads/tails in a row is below 5% for all number of flips 15,000. On the other hand, when the coin is biased, the probability of getting a 20 streak rises dramatically, hitting almost 20% for 15,000 rolls and 80% for 100,000 rolls.
 
 An interesting result is how much a relatively small bias can affect the probability of observing long streaks. A slightly biased coin (60/40) was more likely to produce a 20 streak in 10,000 runs than a nonbiased coin in 10x the amount of runs. From a gambler's perspective, if you are an insane losing streak, it's much more likely that the game was rigged against you rather than the fact that you were simply just unlucky.
