@@ -1,9 +1,9 @@
 ---
-title: "Birthday problem"
+title: "Consecutive streaks"
 description: |
   Analysis of the probability of consecutive streaks
 author: hzg00-jpg
-date: 11/15/24
+date: 11/16/24
 format:
   html:
     code-fold: true
@@ -17,7 +17,7 @@ Suppose you have a binary sequence: 00101101... that is $n$ bits long (in other 
 
 What is the possibility of observing a streak with at least $k$ consecutive bits, given a total bit size of $n$? How does that value change with bias? That is, if probability of getting a 1 is no longer 0.5?
 
-The applications of this simple question span can span from cryptography to gambling. For example, suppose you generate a cryptographyically secure pseudorandom generator (CSPRNG), or a deterministic random number algorithms that is unpredictable enough to be used in cryptography. If you weren't sure if the generated number is biased, you could examine the frequency of certain streaks appearing in your generated value, and compare that to typical streaks of $k$ bits in a simulation of the same size. You can also use the results to understand the probability of losing streaks in gambling. If there truly was a 25% chance to win at this game, is your losing streak of 10 expected, or are you extremely unlucky?
+The applications of this simple question span can span from cryptography to gambling. For example, suppose you generate a cryptographyically secure pseudorandom number generator (CSPRNG), or deterministic algorithm that generates random-looking numbers that are unpredictable enough for cryptographic use. If you weren't sure if the generated number is biased, you could examine the frequency of certain streaks appearing in your generated value, and compare that to typical streaks of $k$ bits in a simulation of the same size. You can also use the results to understand the probability of losing streaks in gambling. If there truly was a 25% chance to win at this game, is your losing streak of 10 expected, or are you extremely unlucky?
 
 The answer to this question is surprisingly nontrivial to solve. Here, we try to answer this question by doing simulations.
 
@@ -40,7 +40,7 @@ set.seed(47470)
 sequence_lengths <- c(10000, 12000, 15000, 100000)
 probabilities <- c(0.5, 0.4) 
 k <- 20
-num_trials = 9000
+num_trials = 5000
 
 simulate_streak <- function(n, prob_one, k) {
   bits <- sample(
@@ -79,6 +79,9 @@ results <- expand_grid(
 
 results
 
+plot_results <- results |>
+  filter(sequence_length != 100000)
+
 ggplot(
   results,
   aes(
@@ -94,13 +97,14 @@ ggplot(
   scale_x_continuous(breaks = sequence_lengths) +
   labs(
     title = "Probability of consecutive heads/tails",
-    subtitle = paste("Streak length of at least", k, ",ran", num_trials, "times"),
+    subtitle = paste0("Streak length of at least ", k, ", ran ", num_trials, " times"),
     x = "Sequence length",
     y = "Probability of a streak occuring",
     color = "Probability of heads"
   ) +
   theme_minimal()
 ```
+(Note: length 100,000 is excluded from the plot)
 
 We can see that, when the coin is fair, the probability of getting 20 heads/tails in a row is very low, below 5% for all rolls below 15,000. On the other hand, when the coin is biased, the probability of getting a 20 streak rises dramatically, hitting almost 20% for 15,000 rolls and 80% for 100,000 rolls.
 
