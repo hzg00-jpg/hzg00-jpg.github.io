@@ -246,7 +246,7 @@ window.Quarto = {
 
 <p>Suppose you have a binary sequence: 00101101… that is <span class="math inline">\(n\)</span> bits long (in other words, it contains <span class="math inline">\(n\)</span> ‘digits’).</p>
 <p>What is the possibility of observing a streak with at least <span class="math inline">\(k\)</span> consecutive bits, given a total bit size of <span class="math inline">\(n\)</span>? How does that value change with bias? That is, if probability of getting a 1 is no longer 0.5?</p>
-<p>The applications of this simple question span can span from cryptography to gambling. For example, suppose you generate a cryptographyically secure pseudorandom number generator (CSPRNG), or deterministic algorithm that generates random-looking numbers that are unpredictable enough for cryptographic use. If you weren’t sure if the generated number is biased, you could examine the frequency of certain streaks appearing in your generated value, and compare that to typical streaks of <span class="math inline">\(k\)</span> bits in a simulation of the same size. You can also use the results to understand the probability of losing streaks in gambling. If there truly was a 25% chance to win at this game, is your losing streak of 10 expected, or are you extremely unlucky?</p>
+<p>The applications of this simple question span can span from cryptography to gambling. For example, suppose you generate a cryptographyically secure pseudorandom number generator (CSPRNG), or a deterministic algorithm that generates random-looking numbers that are unpredictable enough for cryptographic use. If you weren’t sure if the generated number is biased, you could examine the frequency of certain streaks appearing in your generated value, and compare that to typical streaks of <span class="math inline">\(k\)</span> bits in a simulation of the same size. You can also use the results to understand the probability of losing streaks in gambling. If there truly was a 25% chance to win at this game, is your losing streak of 10 expected, or are you extremely unlucky?</p>
 <p>The answer to this question is surprisingly nontrivial to solve. Here, we try to answer this question by doing simulations.</p>
 <section id="coin-analysis" class="level1">
 <h1>Coin analysis</h1>
@@ -353,7 +353,7 @@ window.Quarto = {
 </div>
 </div>
 <p>(Note: length 100,000 is excluded from the plot)</p>
-<p>From the plot, we see that, when the coin is fair, the probability of getting 20 heads/tails in a row is below 5% for all number of flips 15,000. On the other hand, when the coin is biased, the probability of getting a 20 streak rises dramatically, hitting almost 20% for 15,000 rolls and 80% for 100,000 rolls.</p>
+<p>From the plot, we see that, when the coin is fair, the probability of getting 20 heads/tails in a row is below 5% for all number of flips below 15,000. On the other hand, when the coin is biased, the probability of getting a 20 streak rises dramatically, hitting almost 20% for 15,000 rolls and 80% for 100,000 rolls.</p>
 <p>An interesting result is how much a relatively small bias can affect the probability of observing long streaks. A slightly biased coin (60/40) was more likely to produce a 20 streak in 10,000 runs than a nonbiased coin in 10x the amount of runs. From a gambler’s perspective, if you are an insane losing streak, it’s much more likely that the game was rigged against you rather than the fact that you were simply just unlucky.</p>
 
 
