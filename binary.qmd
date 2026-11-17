@@ -83,7 +83,7 @@ plot_results <- results |>
   filter(sequence_length != 100000)
 
 ggplot(
-  results,
+  plot_results,
   aes(
     x = sequence_length,
     y = streak_probability,
