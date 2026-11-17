@@ -18,6 +18,8 @@ website:
             href: shakespeare.qmd
           - text: "Birthday problem"
             href: birthday.qmd
+          - text: "Consecutive streaks probability"
+            href: binary.qmd
 
 format:
   html:
