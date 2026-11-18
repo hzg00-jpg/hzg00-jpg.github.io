@@ -20,6 +20,8 @@ website:
             href: birthday.qmd
           - text: "Consecutive streaks probability"
             href: binary.qmd
+          - text: "Ethics"
+            href: ethics.qmd
 
 format:
   html:
